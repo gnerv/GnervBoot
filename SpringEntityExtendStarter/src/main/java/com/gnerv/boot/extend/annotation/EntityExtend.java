@@ -22,28 +22,39 @@ import java.lang.annotation.Target;
 @Component
 public @interface EntityExtend {
 
-    /*
+    /**
      * 扩展给哪个类 例：UserDTO.class
+     *
+     * @return 扩展给哪个类
      */
     Class[] masterEntity();
 
-    /*
+    /**
      * 查询方法全名 例：com.gnerv.boot.platform.mapper.OrgMapper.selectByUserId
+     *
+     * @return 方法全名
      */
     String selectMethod();
 
-    /*
+    /**
      * 入参 形似同xml文件的关联查询 参数名称=主表字段名称 例：userId=b_id
+     *
+     * @return 入参
      */
     String column();
 
-    /*
+    /**
      * 返回参数类型 Object/List  例：Role.class / List.class
+     *
+     * @return 返回参数类型
      */
+
     Class resultType();
 
     /**
-     * 扩展map的key名称 默认为类名首字母小写 返回List时 加s
+     * 扩展map的key名称
+     *
+     * @return 扩展map的key名称
      */
-    String mapKey() default "";
+    String mapKey();
 }
