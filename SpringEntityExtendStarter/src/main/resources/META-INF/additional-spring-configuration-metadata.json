@@ -1,0 +1,16 @@
+{
+    "groups": [
+        {
+            "sourceType": "com.gnerv.boot.extend.config.ExtendConfigProperties",
+            "name": "gnerv.boot.extend",
+            "type": "com.gnerv.boot.extend.config.ExtendConfigProperties"
+        }
+    ],
+    "properties": [
+        {
+            "name": "gnerv.boot.extend.name",
+            "type": "java.lang.String",
+            "description": "扩展对象使用的属性名."
+        }
+    ]
+}
