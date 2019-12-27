@@ -9,34 +9,58 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import static org.apache.catalina.manager.Constants.CHARSET;
 
+@Slf4j
 public class QrCodeUtils {
 
     private QrCodeUtils() {
     }
 
     public static BufferedImage encode(String content) {
-        int i = new Random().nextInt();
         int width = 320;
         int height = 320;
-        BufferedImage bufferedImage;
         try {
-            BitMatrix encode = new QRCodeWriter().encode(content + i, BarcodeFormat.QR_CODE, width, height, createHints());
-            bufferedImage = MatrixToImageWriter.toBufferedImage(encode);
-            bufferedImage = ImageUtils.insertLogo(bufferedImage, null, ImagePosition.BOTTOM_LEFT, 5);
+            BitMatrix encode = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, width, height, createHints());
+            BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(encode);
             return bufferedImage;
         } catch (WriterException e) {
-            e.printStackTrace();
+            log.error("二维码生成失败", e);
         }
         return null;
     }
+
+    public static BufferedImage encode(String content, BufferedImage logoImage) {
+        BufferedImage bufferedImage = encode(content);
+        bufferedImage = ImageUtils.insertLogo(bufferedImage, logoImage, ImagePosition.CENTER, 5);
+        return bufferedImage;
+    }
+
+    public static BufferedImage encode(String content, BufferedImage logoImage, ImagePosition imagePosition) {
+        BufferedImage bufferedImage = encode(content);
+        bufferedImage = ImageUtils.insertLogo(bufferedImage, logoImage, imagePosition, 5);
+        return bufferedImage;
+    }
+
+    public static BufferedImage encode(String content, BufferedImage logoImage, ImagePosition imagePosition, int shrink) {
+        BufferedImage bufferedImage = encode(content);
+        bufferedImage = ImageUtils.insertLogo(bufferedImage, logoImage, imagePosition, shrink);
+        return bufferedImage;
+    }
+
+
+
+
 
     private static Map createHints() {
         Map hints = new HashMap();

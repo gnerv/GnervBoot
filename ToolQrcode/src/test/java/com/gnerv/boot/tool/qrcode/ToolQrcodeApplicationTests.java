@@ -30,7 +30,7 @@ class ToolQrcodeApplicationTests {
         try {
             BitMatrix encode = encode(s);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(encode);
-            ImageIO.write(bufferedImage, "png", new File("H:\\1232.png"));
+            ImageIO.write(bufferedImage, "png", new File("E:\\1232.png"));
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
@@ -42,10 +42,10 @@ class ToolQrcodeApplicationTests {
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         BitMatrix encode;
-        encode = new QRCodeWriter().encode(contents, BarcodeFormat.QR_CODE, 320, 20);
-        encode = new MultiFormatWriter().encode(contents, BarcodeFormat.DATA_MATRIX, 320, 80);
+        encode = new QRCodeWriter().encode(contents, BarcodeFormat.QR_CODE, 320, 320);
+//        encode = new MultiFormatWriter().encode(contents, BarcodeFormat.DATA_MATRIX, 320, 80);
 //        encode = new DataMatrixWriter().encode(contents, BarcodeFormat.DATA_MATRIX, 320, 80);
-        encode = new PDF417Writer().encode(contents, BarcodeFormat.PDF_417, 320, 80);
+//        encode = new PDF417Writer().encode(contents, BarcodeFormat.PDF_417, 320, 80);
         return encode;
     }
 
