@@ -19,4 +19,10 @@
         <gnerv.version>0.0.1-SNAPSHOT</gnerv.version>
     </properties>
 
+    <modules>
+        <module>SpringEntityExtendStarter</module>
+        <module>ToolImage</module>
+        <module>ToolQrcode</module>
+    </modules>
+
 </project>
