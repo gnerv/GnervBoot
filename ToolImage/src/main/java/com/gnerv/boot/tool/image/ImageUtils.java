@@ -4,8 +4,7 @@ import com.gnerv.boot.tool.image.config.ImagePosition;
 import com.google.common.collect.Maps;
 
 import javax.imageio.ImageIO;
-import java.awt.AlphaComposite;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -108,9 +107,19 @@ public class ImageUtils {
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedImage source = ImageIO.read(new File("H:\\demo.png"));
-        BufferedImage backgroundImage = ImageIO.read(new File("H:\\2015081415025944.jpg"));
-        BufferedImage bufferedImage = insertBackground(source, backgroundImage);
-        ImageIO.write(bufferedImage, "png", new File("H:\\bg.png"));
+//        BufferedImage backgroundImage = ImageIO.read(new File("H:\\2015081415025944.jpg"));
+//        BufferedImage bufferedImage = insertBackground(source, backgroundImage);
+
+        BufferedImage bufferedImage=new BufferedImage(320, 320, BufferedImage.TYPE_INT_RGB);
+
+        BufferedImage source = ImageIO.read(new File("E:\\bg-start.jpg"));
+        Graphics2D graphics = bufferedImage.createGraphics();
+        graphics.setBackground(Color.WHITE);
+        graphics.clearRect(0, 0, 320, 320);
+        graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 0.9f));
+        graphics.rotate(Math.toRadians(5));
+        graphics.drawImage(source, 0, 0, 300, 300, null);
+
+        ImageIO.write(bufferedImage, "png", new File("E:\\bg.png"));
     }
 }
