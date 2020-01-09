@@ -6,4 +6,5 @@ import java.rmi.registry.Registry;
 public interface IRegistryService {
 
     void rebindService(Remote remote);
+
 }
